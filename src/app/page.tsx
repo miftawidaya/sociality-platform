@@ -1,5 +1,7 @@
+import { DesignSystem } from '@/components/dev/DesignSystem';
+
 const Home = () => {
-  return <div></div>;
+  return <DesignSystem />;
 };
 
 export default Home;
