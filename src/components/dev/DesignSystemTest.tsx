@@ -10,6 +10,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 /** Neutral color swatches from globals.css */
 const NEUTRAL_SWATCHES = [
@@ -87,6 +88,7 @@ const RADIUS_TOKENS = [
 ] as const;
 
 import { DevLayout } from './DevLayout';
+import { Logo } from '../ui/logo';
 
 export function DesignSystem({ showLayout = true }: { showLayout?: boolean }) {
   const [mounted, setMounted] = React.useState(false);
@@ -338,6 +340,64 @@ export function DesignSystem({ showLayout = true }: { showLayout?: boolean }) {
                 +
               </Button>
             </div>
+          </div>
+
+          <div className='space-y-6xl'>
+            <h3 className='text-text-lg-semibold text-muted-foreground tracking-widest uppercase'>
+              Input States
+            </h3>
+            <div className='grid gap-6 md:grid-cols-2'>
+              <div className='space-y-2'>
+                <p className='text-foreground/70 text-sm'>Default</p>
+                <Input placeholder='Enter text here...' />
+              </div>
+              <div className='space-y-2'>
+                <p className='text-foreground/70 text-sm'>Disabled</p>
+                <Input disabled placeholder='Not allowed' />
+              </div>
+              <div className='space-y-2'>
+                <p className='text-foreground/70 text-sm'>Error State</p>
+                <Input
+                  aria-invalid={true}
+                  placeholder='Invalid value'
+                  defaultValue='wrong text'
+                />
+                <p className='text-destructive mt-1 text-xs'>
+                  Please enter a valid value.
+                </p>
+              </div>
+              <div className='space-y-2'>
+                <p className='text-foreground/70 text-sm'>File Upload</p>
+                <Input type='file' />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Logo Components */}
+      <div className='space-y-6xl' aria-labelledby='logo-heading'>
+        <h2 id='logo-heading' className='display-sm-bold text-foreground'>
+          Logo (Single SVG with CSS Color Control)
+        </h2>
+
+        <div className='card space-y-7xl'>
+          <div className='space-y-6xl'>
+            <h3 className='text-text-lg-semibold text-muted-foreground tracking-widest uppercase'>
+              Brand Colored (text-primary)
+            </h3>
+            <span className='text-primary inline-block'>
+              <Logo className='size-10' />
+            </span>
+          </div>
+
+          <div className='space-y-6xl'>
+            <h3 className='text-text-lg-semibold text-muted-foreground tracking-widest uppercase'>
+              Base Color (text-foreground)
+            </h3>
+            <span className='text-foreground inline-block'>
+              <Logo className='size-10' />
+            </span>
           </div>
         </div>
       </div>

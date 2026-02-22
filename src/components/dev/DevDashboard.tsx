@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { DevLayout } from './DevLayout';
-import { DesignSystem } from './DesignSystem';
+import { DesignSystem } from './DesignSystemTest';
 import { IconTest } from './IconTest';
 
 /**
@@ -17,7 +17,7 @@ export function DevDashboard() {
       title='Developer Dashboard'
       description='Unified view of all project design system and component benchmarks'
     >
-      <div className='space-y-10xl'>
+      <div className='space-y-10xl mt-10xl'>
         <DesignSystem showLayout={false} />
         <IconTest showLayout={false} />
       </div>

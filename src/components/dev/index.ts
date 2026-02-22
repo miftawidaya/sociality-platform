@@ -1,2 +1,2 @@
-export { DesignSystem } from './DesignSystem';
+export { DesignSystem } from './DesignSystemTest';
 export { ThemeSwitcher } from './ThemeSwitcher';

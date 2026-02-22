@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { siteConfig } from '@/config/site-metadata';
 
 type DevLayoutProps = Readonly<{
   children: React.ReactNode;
@@ -51,7 +52,7 @@ export function DevLayout({
       <footer className='border-border mt-20 border-t py-12'>
         <div className='custom-container text-center'>
           <p className='text-text-sm-regular text-muted-foreground'>
-            Sociality Design System — Developer Test Environment
+            {siteConfig.name} Design System — Developer Test Environment
           </p>
         </div>
       </footer>
