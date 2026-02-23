@@ -5,6 +5,7 @@ import '@/styles/globals.css';
 import { siteMetadata } from '@/config/site-metadata';
 import { cn } from '@/lib/utils';
 import { ThemeSwitcher } from '@/components/dev';
+import { Providers } from './providers';
 
 const fontSans = localFont({
   src: [
@@ -75,8 +76,10 @@ export default function RootLayout({
           fontMono.variable
         )}
       >
-        <main>{children}</main>
-        <ThemeSwitcher />
+        <Providers>
+          <main>{children}</main>
+          <ThemeSwitcher />
+        </Providers>
       </body>
     </html>
   );
