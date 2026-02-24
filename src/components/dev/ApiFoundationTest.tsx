@@ -9,9 +9,10 @@ import { setCredentials, clearCredentials } from '@/store/slices/authSlice';
 import api from '@/lib/api/client';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { API_ENDPOINTS } from '@/config/api';
 
-const TEST_API_ENDPOINT = '/api/posts?limit=1';
-const INVALID_TRIGGER_ENDPOINT = '/api/me';
+const TEST_API_ENDPOINT = `${API_ENDPOINTS.POSTS.LIST}?limit=1`;
+const INVALID_TRIGGER_ENDPOINT = API_ENDPOINTS.USER.PROFILE;
 
 /**
  * ApiFoundationTest Component

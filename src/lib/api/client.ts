@@ -1,5 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
+import { ROUTES, AUTH_ONLY_ROUTES } from '@/config/routes';
 
 /**
  * Extended AxiosError to include standardized error messages
@@ -87,12 +88,11 @@ api.interceptors.response.use(
     if (status === 401) {
       Cookies.remove('token');
 
-      const authPages = ['/login', '/register', '/forgot-password'];
-      const isAuthPage = authPages.some((page) => currentPath.startsWith(page));
+      const isAuthPage = AUTH_ONLY_ROUTES.has(currentPath);
 
       if (typeof window !== 'undefined' && !isAuthPage) {
         window.location.replace(
-          `/login?callbackUrl=${encodeURIComponent(currentPath)}`
+          `${ROUTES.LOGIN}?callbackUrl=${encodeURIComponent(currentPath)}`
         );
       }
     }

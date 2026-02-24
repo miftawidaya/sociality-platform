@@ -77,6 +77,10 @@
   --color-base-white: #ffffff;
   --color-base-black: #000000;
 
+  /* Auth Background Assets (Tailwind v4 mapped) */
+  --background-image-auth-mesh: url('/images/bg-gradient.jpg');
+  --background-image-auth-mesh-mobile: url('/images/bg-gradient-mobile.jpg');
+
   /* Radius */
   --radius-xxs: 0.125rem;
   --radius-xs: 0.25rem;
@@ -106,7 +110,11 @@
   --spacing-10xl: 8rem;
   --spacing-11xl: 8.75rem;
 
+  --spacing-field-gap: 0.125rem;
   --spacing-container-max: 78rem;
+
+  --spacing-auth-card-mobile: 21.5625rem; /* 345px */
+  --spacing-auth-card-desktop: 27.875rem; /* 446px */
 }
 
 :root {
