@@ -9,10 +9,10 @@ import { setCredentials, clearCredentials } from '@/store/slices/authSlice';
 import api from '@/lib/api/client';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { API_ENDPOINTS } from '@/config/api';
 
-const TEST_API_ENDPOINT = `${API_ENDPOINTS.POSTS.LIST}?limit=1`;
-const INVALID_TRIGGER_ENDPOINT = API_ENDPOINTS.USER.PROFILE;
+/** Hardcoded test endpoints (dev tool only, not production code) */
+const TEST_API_ENDPOINT = '/api/posts?limit=1';
+const INVALID_TRIGGER_ENDPOINT = '/api/me';
 
 /**
  * ApiFoundationTest Component
@@ -79,8 +79,12 @@ export function ApiFoundationTest({
   const trigger401 = async () => {
     try {
       await api.get(INVALID_TRIGGER_ENDPOINT);
-    } catch (error: any) {
-      console.log('Error caught in test component:', error.response?.status);
+    } catch (error: unknown) {
+      const status =
+        error instanceof Error && 'response' in error
+          ? (error as { response?: { status?: number } }).response?.status
+          : undefined;
+      console.log('Error caught in test component:', status);
       setCookieValue(Cookies.get('token') || 'None');
     }
   };
