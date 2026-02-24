@@ -9,11 +9,11 @@ const textSizes = {
   'display-md': '--text-display-md',
   'display-sm': '--text-display-sm',
   'display-xs': '--text-display-xs',
-  'text-xl': '--text-xl',
-  'text-lg': '--text-lg',
-  'text-md': '--text-md',
-  'text-sm': '--text-sm',
-  'text-xs': '--text-xs',
+  'text-xl': '--text-text-xl',
+  'text-lg': '--text-text-lg',
+  'text-md': '--text-text-md',
+  'text-sm': '--text-text-sm',
+  'text-xs': '--text-text-xs',
 };
 
 const fontWeights = {

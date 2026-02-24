@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 const buttonVariants = cva(
   cn(
     // Base Layout & Flexbox
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap',
+    'inline-flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer',
     // Border Radius & Sizing
     'rounded-full shrink-0',
     // Typography
@@ -15,7 +15,7 @@ const buttonVariants = cva(
     // Transitions
     'transition-all',
     // Disabled States
-    'disabled:pointer-events-none disabled:opacity-50',
+    'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
     // Icon Handling (SVG)
     '[&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-4 [&_svg]:shrink-0',
     // Focus & Error States

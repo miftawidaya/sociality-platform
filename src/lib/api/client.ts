@@ -68,41 +68,27 @@ api.interceptors.response.use(
       'An unexpected error occurred';
     (error as ApiError).message = message;
 
-    if (process.env.NODE_ENV === 'development') {
-      console.error(
-        `[API Error] ${error.config?.method?.toUpperCase()} ${error.config?.url}:`,
-        {
-          status,
-          message,
-          data: error.response?.data,
-        }
-      );
-    }
-
     /**
      * Session Revocation Handling (401 Unauthorized):
-     * 1. Purge local auth credentials.
-     * 2. Trigger redirect to login unless target is already an auth-related view
-     *    to prevent redirection loops.
+     * Purge local auth credentials and redirect to login unless:
+     * - Already on an auth page (prevents loops)
+     * - The request itself was to an auth endpoint (login/register)
      */
     if (status === 401) {
-      Cookies.remove('token');
+      const requestUrl = error.config?.url ?? '';
+      const isAuthRequest = requestUrl.includes('/auth/');
 
-      const isAuthPage = AUTH_ONLY_ROUTES.has(currentPath);
+      if (isAuthRequest === false) {
+        Cookies.remove('token');
 
-      if (typeof window !== 'undefined' && !isAuthPage) {
-        window.location.replace(
-          `${ROUTES.LOGIN}?callbackUrl=${encodeURIComponent(currentPath)}`
-        );
+        const isAuthPage = AUTH_ONLY_ROUTES.has(currentPath);
+
+        if (typeof window !== 'undefined' && isAuthPage === false) {
+          window.location.replace(
+            `${ROUTES.LOGIN}?callbackUrl=${encodeURIComponent(currentPath)}`
+          );
+        }
       }
-    }
-
-    /**
-     * Server Fault Handling (500+):
-     * Reserved for global monitoring or toast notification triggers.
-     */
-    if (status && status >= 500) {
-      console.warn('Integrated server-side fault detected.');
     }
 
     return Promise.reject(error);

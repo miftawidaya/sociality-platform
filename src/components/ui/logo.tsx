@@ -1,11 +1,13 @@
-type LogoProps = Readonly<{
-  className?: string;
-}>;
+import * as React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+
+import { cn } from '@/lib/utils';
+import { siteConfig } from '@/config/site-metadata';
 
 /**
- * Brand Logo component - Single Source of Truth for the brand mark.
+ * SVG brand mark
  */
-export const Logo = ({ className }: LogoProps) => {
+function LogoMark({ className }: Readonly<{ className?: string }>) {
   return (
     <svg
       viewBox='0 0 43 43'
@@ -22,4 +24,74 @@ export const Logo = ({ className }: LogoProps) => {
       />
     </svg>
   );
-};
+}
+
+const logoVariants = cva('inline-flex items-center', {
+  variants: {
+    variant: {
+      full: 'gap-3',
+      icon: '',
+    },
+    size: {
+      sm: '',
+      default: '',
+      lg: '',
+    },
+  },
+  defaultVariants: {
+    variant: 'full',
+    size: 'default',
+  },
+});
+
+const iconSizeMap = {
+  sm: 'size-5',
+  default: 'size-7.5',
+  lg: 'size-10',
+} as const;
+
+const textSizeMap = {
+  sm: 'text-md-bold',
+  default: 'display-xs-bold',
+  lg: 'display-sm-bold',
+} as const;
+
+type LogoProps = Readonly<
+  React.ComponentPropsWithoutRef<'div'> & VariantProps<typeof logoVariants>
+>;
+
+/**
+ * Brand Logo component -- single source of truth for the Sociality brand mark.
+ *
+ * @example
+ * ```tsx
+ * <Logo />                          // full + default
+ * <Logo variant="icon" size="sm" /> // icon only, small
+ * <Logo size="lg" />                // full + large
+ * ```
+ */
+function Logo({
+  className,
+  variant = 'full',
+  size = 'default',
+  ...props
+}: LogoProps) {
+  const resolvedSize = size ?? 'default';
+
+  return (
+    <div
+      data-slot='logo'
+      className={cn(logoVariants({ variant, size, className }))}
+      {...props}
+    >
+      <LogoMark className={iconSizeMap[resolvedSize]} />
+      {variant !== 'icon' && (
+        <span className={cn(textSizeMap[resolvedSize], 'text-current')}>
+          {siteConfig.name}
+        </span>
+      )}
+    </div>
+  );
+}
+
+export { Logo, LogoMark, logoVariants };
