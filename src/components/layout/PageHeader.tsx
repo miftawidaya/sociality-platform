@@ -65,7 +65,7 @@ export function PageHeader({
           </button>
 
           {isMenuOpen && (
-            <div className='border-border bg-background absolute inset-s-0 inset-e-0 top-16 flex items-center gap-2 border-b px-4 py-3 shadow-sm'>
+            <div className='border-border bg-background absolute inset-s-0 inset-e-0 top-16 -mt-px flex items-center gap-2 border-b px-4 pb-3 shadow-sm'>
               <Button variant='outline' size='lg' className='grow' asChild>
                 <Link href={ROUTES.LOGIN}>Login</Link>
               </Button>
