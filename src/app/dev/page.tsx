@@ -1,4 +1,7 @@
 import { DevDashboard } from '@/components/dev/DevDashboard';
+import { Navbar } from '@/components/layout/Navbar';
+
+import { PageHeader } from '@/components/layout/PageHeader';
 
 /**
  * Dev Page
@@ -6,5 +9,11 @@ import { DevDashboard } from '@/components/dev/DevDashboard';
  * Simple route that renders the DevDashboard component.
  */
 export default function Page() {
-  return <DevDashboard />;
+  return (
+    <>
+      <Navbar className='hidden md:block' />
+      <PageHeader title='Developer' className='md:hidden' />
+      <DevDashboard />
+    </>
+  );
 }
