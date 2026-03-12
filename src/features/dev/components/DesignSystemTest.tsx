@@ -88,9 +88,13 @@ const RADIUS_TOKENS = [
 ] as const;
 
 import { DevLayout } from './DevLayout';
-import { Logo } from '../ui/logo';
+import { Logo } from '@/components/ui/logo';
 
-export function DesignSystem({ showLayout = true }: { showLayout?: boolean }) {
+export function DesignSystem({
+  showLayout = true,
+}: Readonly<{
+  showLayout?: boolean;
+}>) {
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {

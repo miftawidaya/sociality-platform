@@ -1,7 +1,7 @@
-import { DevDashboard } from '@/components/dev/DevDashboard';
-import { Navbar } from '@/components/layout/Navbar';
+import { DevDashboard } from '@/features/dev/components/DevDashboard';
+import { Navbar } from '@/components/layouts/header/Navbar';
 
-import { PageHeader } from '@/components/layout/PageHeader';
+import { PageHeader } from '@/components/layouts/header/PageHeader';
 
 /**
  * Dev Page

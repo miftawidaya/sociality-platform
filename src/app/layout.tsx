@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 import '@/styles/globals.css';
 import { siteMetadata } from '@/config/site-metadata';
 import { cn } from '@/lib/utils';
-import { ThemeSwitcher } from '@/components/dev';
+import { ThemeSwitcher } from '@/features/dev/components';
 import { Providers } from './providers';
 
 const fontSans = localFont({

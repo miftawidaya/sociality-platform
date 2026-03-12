@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { ArrowLeft, Menu01, XClose } from '@untitledui/icons';
 import { cn } from '@/lib/utils';
-import { ProfileMenu } from '@/components/layout/ProfileMenu';
+import { ProfileMenu } from '@/components/layouts/header/ProfileMenu';
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/config/routes';
 import type { RootState } from '@/store';

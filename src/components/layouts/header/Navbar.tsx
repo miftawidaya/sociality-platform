@@ -11,7 +11,7 @@ import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/config/routes';
 import { useSessionRehydration } from '@/features/auth/hooks/useSessionRehydration';
-import { ProfileMenu } from '@/components/layout/ProfileMenu';
+import { ProfileMenu } from '@/components/layouts/header/ProfileMenu';
 import type { RootState } from '@/store';
 
 function NavbarSearch() {

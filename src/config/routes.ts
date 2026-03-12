@@ -4,6 +4,7 @@ export const ROUTES = {
   REGISTER: '/register',
   FEED: '/feed',
   PROFILE: '/me',
+  DEV: '/dev',
 } as const;
 
 export const AUTH_ONLY_ROUTES: Set<string> = new Set([

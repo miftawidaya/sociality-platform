@@ -43,8 +43,6 @@ import {
   Send2,
   Heart,
   Message,
-  Grid4,
-  Bookmark,
   Grid3,
 } from 'iconsax-react';
 
@@ -120,7 +118,9 @@ const VUESAX_ICONS: IconItem[] = [
 
 import { DevLayout } from './DevLayout';
 
-export function IconTest({ showLayout = true }: { showLayout?: boolean }) {
+export function IconTest({
+  showLayout = true,
+}: Readonly<{ showLayout?: boolean }>) {
   const content = (
     <section
       className={cn(

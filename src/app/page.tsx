@@ -1,4 +1,4 @@
-import { DesignSystem } from '@/components/dev/DesignSystemTest';
+import { DesignSystem } from '@/features/dev/components/DesignSystemTest';
 
 const Home = () => {
   return <DesignSystem />;

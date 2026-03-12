@@ -25,9 +25,9 @@ const INVALID_TRIGGER_ENDPOINT = '/api/me';
  */
 export function ApiFoundationTest({
   showLayout = false,
-}: {
+}: Readonly<{
   showLayout?: boolean;
-}) {
+}>) {
   const dispatch = useDispatch();
   const auth = useSelector((state: RootState) => state.auth);
   const [cookieValue, setCookieValue] = useState('None');
@@ -88,6 +88,15 @@ export function ApiFoundationTest({
       setCookieValue(Cookies.get('token') || 'None');
     }
   };
+
+  let queryStatusText = 'Ready';
+  if (isLoading) {
+    queryStatusText = 'Loading...';
+  } else if (isError) {
+    queryStatusText = 'Error';
+  } else if (data) {
+    queryStatusText = 'Success';
+  }
 
   const content = (
     <section
@@ -179,11 +188,17 @@ export function ApiFoundationTest({
 
               {auth.user && (
                 <div className='bg-muted/30 border-border/10 p-md flex items-center gap-4 rounded-xl border shadow-sm transition-all'>
-                  <img
-                    src={auth.user.avatarUrl || ''}
-                    className='border-border/40 size-10 rounded-full border object-cover'
-                    alt=''
-                  />
+                  {auth.user.avatarUrl ? (
+                    <img
+                      src={auth.user.avatarUrl}
+                      className='border-border/40 size-10 rounded-full border object-cover'
+                      alt=''
+                    />
+                  ) : (
+                    <div className='bg-primary/10 border-border/40 text-primary text-text-sm-bold flex size-10 items-center justify-center rounded-full border uppercase'>
+                      {auth.user.name?.charAt(0) || '?'}
+                    </div>
+                  )}
                   <div>
                     <p className='text-text-sm-bold text-foreground leading-tight'>
                       {auth.user.name}
@@ -221,13 +236,7 @@ export function ApiFoundationTest({
                 <span className='text-text-sm-medium text-muted-foreground'>
                   Status:{' '}
                   <span className='text-foreground'>
-                    {isLoading
-                      ? 'Loading...'
-                      : isError
-                        ? 'Error'
-                        : data
-                          ? 'Success'
-                          : 'Ready'}
+                    {queryStatusText}
                   </span>
                 </span>
                 {isFetching && (
