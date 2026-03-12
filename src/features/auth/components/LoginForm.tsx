@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -12,9 +12,8 @@ import { Input } from '@/components/ui/input';
 import { Logo } from '@/components/ui/logo';
 import { loginSchema } from '@/features/auth/validations/auth';
 import { ROUTES } from '@/config/routes';
-import { useLoginMutation } from '../hooks/useLoginMutation';
-import type { LoginInput } from '@/features/auth/types';
-import { useState } from 'react';
+import { useLoginMutation } from '../queries/auth.queries';
+import type { LoginInput } from '@/features/auth/types/auth.types';
 
 function LoginFormContent() {
   const searchParams = useSearchParams();
@@ -99,7 +98,7 @@ function LoginFormContent() {
               <button
                 type='button'
                 onClick={() => setShowPassword(!showPassword)}
-                className='absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer text-neutral-500 hover:text-white'
+                className='hover:text-foreground absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer text-neutral-500'
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 <span className='sr-only'>

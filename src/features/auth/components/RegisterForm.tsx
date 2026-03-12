@@ -11,8 +11,8 @@ import { Input } from '@/components/ui/input';
 import { Logo } from '@/components/ui/logo';
 import { registerSchema } from '@/features/auth/validations/auth';
 import { ROUTES } from '@/config/routes';
-import { useRegisterMutation } from '../hooks/useRegisterMutation';
-import type { RegisterInput } from '@/features/auth/types';
+import { useRegisterMutation } from '../queries/auth.queries';
+import type { RegisterInput } from '@/features/auth/types/auth.types';
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);

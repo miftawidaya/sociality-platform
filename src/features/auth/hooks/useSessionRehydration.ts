@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 
 import { setCredentials } from '@/store/slices/authSlice';
-import { getMeRequest } from '../api/get-me';
+import { getMeRequest } from '../api/auth.api';
 import type { RootState } from '@/store';
 
 /**

@@ -60,7 +60,7 @@ api.interceptors.response.use(
   (error: AxiosError) => {
     const status = error.response?.status;
     const currentPath =
-      typeof window !== 'undefined' ? window.location.pathname : '';
+      globalThis.window === undefined ? '' : globalThis.location.pathname;
 
     /**
      * Error Normalization:
@@ -92,11 +92,11 @@ api.interceptors.response.use(
           PROTECTED_PREFIXES.some((prefix) => currentPath.startsWith(prefix));
 
         if (
-          typeof window !== 'undefined' &&
+          globalThis.window !== undefined &&
           isAuthPage === false &&
           isProtectedPath
         ) {
-          window.location.replace(
+          globalThis.location.replace(
             `${ROUTES.LOGIN}?callbackUrl=${encodeURIComponent(currentPath)}`
           );
         }

@@ -1,6 +1,6 @@
-@config '../../tailwind.config.ts';
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import './typography-utilities.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -217,20 +217,44 @@ html {
 
 @layer components {
   .custom-container {
-    @apply max-w-container-max mx-auto w-full ps-4 pe-4 md:ps-6 md:pe-6;
+    max-width: var(--spacing-container-max);
+    margin-inline: auto;
+    width: 100%;
+    padding-inline: 1rem;
+
+    @media (width >= 48rem) {
+      padding-inline: 1.5rem;
+    }
   }
 
   .card {
-    @apply border-border bg-card/40 dark:bg-card/20 rounded-2xl border p-4 backdrop-blur-xl md:p-6;
+    border: 1px solid var(--color-border);
+    background-color: color-mix(in srgb, var(--color-card) 40%, transparent);
+    border-radius: var(--radius-2xl);
+    padding: 1rem;
+    backdrop-filter: blur(24px);
+
+    @media (width >= 48rem) {
+      padding: 1.5rem;
+    }
+  }
+
+  .dark .card {
+    background-color: color-mix(in srgb, var(--color-card) 20%, transparent);
   }
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--color-border);
+    outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
+
   body {
-    @apply bg-background text-foreground antialiased;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-family: var(--font-sans), ui-sans-serif, system-ui;
   }
 }

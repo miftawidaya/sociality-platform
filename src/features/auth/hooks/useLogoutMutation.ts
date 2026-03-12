@@ -11,6 +11,6 @@ import { ROUTES } from '@/config/routes';
 export function useLogout() {
   return useCallback(() => {
     clearSession();
-    window.location.replace(ROUTES.LOGIN);
+    globalThis.location.replace(ROUTES.LOGIN);
   }, []);
 }
