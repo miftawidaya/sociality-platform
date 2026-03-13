@@ -115,6 +115,10 @@
 
   --spacing-auth-card-mobile: 21.5625rem; /* 345px */
   --spacing-auth-card-desktop: 27.875rem; /* 446px */
+  --spacing-bottom-nav-mobile: 21.5625rem; /* 345px */
+  --spacing-bottom-nav-desktop: 22.5rem; /* 360px */
+  --spacing-bottom-nav-gap: 2.8125rem; /* 45px */
+  --spacing-bottom-nav-item: 5.875rem; /* 94px */
 }
 
 :root {
