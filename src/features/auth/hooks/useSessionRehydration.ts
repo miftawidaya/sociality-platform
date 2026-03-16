@@ -2,10 +2,13 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { usePathname } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 import { setCredentials } from '@/store/slices/authSlice';
 import { getMeRequest } from '../api/auth.api';
+import { AUTH_ONLY_ROUTES } from '@/config/routes';
+import { isValidJwtStructure, isJwtExpired } from '@/lib/utils/jwt';
 import type { RootState } from '@/store';
 
 /**
@@ -16,13 +19,19 @@ import type { RootState } from '@/store';
  */
 export function useSessionRehydration() {
   const dispatch = useDispatch();
+  const pathname = usePathname();
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const token = Cookies.get('token');
-    const shouldRehydrate = token && isAuthenticated === false;
+    const isAuthPage = AUTH_ONLY_ROUTES.has(pathname);
 
-    if (shouldRehydrate === false) return;
+    if (!token || isAuthenticated || isAuthPage) return;
+
+    if (!isValidJwtStructure(token) || isJwtExpired(token)) {
+      Cookies.remove('token');
+      return;
+    }
 
     let cancelled = false;
 
@@ -43,8 +52,7 @@ export function useSessionRehydration() {
           );
         }
       } catch {
-        // Token is invalid or expired; cookie will be cleared by
-        // the 401 interceptor automatically.
+        Cookies.remove('token');
       }
     }
 
@@ -53,5 +61,5 @@ export function useSessionRehydration() {
     return () => {
       cancelled = true;
     };
-  }, [dispatch, isAuthenticated]);
+  }, [dispatch, isAuthenticated, pathname]);
 }

@@ -9,11 +9,21 @@ import { ROUTES } from '@/config/routes';
 import { cn } from '@/lib/utils';
 import { memo } from 'react';
 
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
+
 /**
  * Bottom Navigation Bar for both mobile and desktop.
  */
 function BottomNavbarComponent() {
   const pathname = usePathname();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const isActive = (path: string) => {
     if (path === ROUTES.HOME) {
@@ -22,18 +32,25 @@ function BottomNavbarComponent() {
     return pathname?.startsWith(path);
   };
 
+  const isPostDetailPage = pathname?.startsWith('/posts/');
+
   return (
-    <div className='fixed bottom-8 left-1/2 z-50 -translate-x-1/2'>
+    <div
+      className={cn(
+        'fixed bottom-6 left-1/2 z-40 w-full max-w-94 -translate-x-1/2 px-4 transition-opacity md:max-w-98',
+        isPostDetailPage ? 'md:hidden' : 'flex'
+      )}
+    >
       <nav
         className={cn(
-          'bg-card/80 border-border gap-bottom-nav-gap flex items-center justify-center rounded-full border backdrop-blur-3xl',
-          'h-16 w-bottom-nav-mobile',
-          'md:h-20 md:w-bottom-nav-desktop'
+          'bg-card/80 border-border flex items-center justify-between gap-4 rounded-full border px-3 backdrop-blur-3xl',
+          'h-16 w-full',
+          'md:h-20'
         )}
       >
         <Link
           href={ROUTES.HOME}
-          className='w-bottom-nav-item group flex cursor-pointer flex-col items-center justify-center gap-0.5 md:gap-1'
+          className='group flex w-23.5 cursor-pointer flex-col items-center justify-center gap-0.5 md:gap-1'
           aria-current={isActive(ROUTES.HOME) ? 'page' : undefined}
           aria-label='Home'
         >
@@ -52,8 +69,8 @@ function BottomNavbarComponent() {
               'font-sans text-xs tracking-[-0.02em] transition-colors',
               'leading-6 md:text-base md:leading-snug',
               isActive(ROUTES.HOME)
-                ? 'font-bold text-primary'
-                : 'font-normal text-muted-foreground group-hover:text-foreground'
+                ? 'text-primary font-bold'
+                : 'text-muted-foreground group-hover:text-foreground font-normal'
             )}
           >
             Home
@@ -70,12 +87,15 @@ function BottomNavbarComponent() {
           )}
           aria-label='Create post'
         >
-          <Plus className='size-5.5 text-primary-foreground md:size-6' strokeWidth={2.5} />
+          <Plus
+            className='text-primary-foreground size-5.5 md:size-6'
+            strokeWidth={2.5}
+          />
         </button>
 
         <Link
           href={ROUTES.PROFILE}
-          className='w-bottom-nav-item group flex cursor-pointer flex-col items-center justify-center gap-0.5 md:gap-1'
+          className='group flex w-23.5 cursor-pointer flex-col items-center justify-center gap-0.5 md:gap-1'
           aria-current={isActive(ROUTES.PROFILE) ? 'page' : undefined}
           aria-label='Profile'
         >
@@ -94,8 +114,8 @@ function BottomNavbarComponent() {
               'font-sans text-xs tracking-[-0.02em] transition-colors',
               'leading-4 md:text-base md:leading-snug',
               isActive(ROUTES.PROFILE)
-                ? 'font-bold text-primary'
-                : 'font-normal text-muted-foreground group-hover:text-foreground'
+                ? 'text-primary font-bold'
+                : 'text-muted-foreground group-hover:text-foreground font-normal'
             )}
           >
             Profile

@@ -98,7 +98,7 @@ function LoginFormContent() {
               <button
                 type='button'
                 onClick={() => setShowPassword(!showPassword)}
-                className='hover:text-foreground absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer text-neutral-500'
+                className='hover:text-foreground absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground'
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 <span className='sr-only'>
@@ -140,7 +140,7 @@ function LoginFormContent() {
             <span className='text-foreground'>Don&apos;t have an account?</span>
             <Link
               href={ROUTES.REGISTER}
-              className='text-primary hover:text-primary-200 font-bold'
+              className='text-primary font-bold hover:opacity-80'
             >
               Sign up
             </Link>

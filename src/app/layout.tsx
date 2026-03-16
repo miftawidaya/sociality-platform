@@ -77,7 +77,7 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main>{children}</main>
+          {children}
           <ThemeSwitcher position='center' />
         </Providers>
       </body>

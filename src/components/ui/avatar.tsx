@@ -47,6 +47,7 @@ function AvatarFallback({
   return (
     <AvatarPrimitive.Fallback
       data-slot='avatar-fallback'
+      suppressHydrationWarning
       className={cn(
         'bg-primary/20 text-primary text-md-bold group-data-size-sm/avatar:text-sm-bold flex size-full items-center justify-center rounded-full',
         className

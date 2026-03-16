@@ -1,5 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
+import { isValidJwtStructure, isJwtExpired } from '../utils/jwt';
 import {
   ROUTES,
   AUTH_ONLY_ROUTES,
@@ -42,6 +43,12 @@ api.interceptors.request.use(
     const token = Cookies.get('token');
 
     if (token && config.headers) {
+      // Avoid attaching malformed or expired tokens to requests
+      if (!isValidJwtStructure(token) || isJwtExpired(token)) {
+        Cookies.remove('token');
+        return config;
+      }
+      
       config.headers.Authorization = `Bearer ${token}`;
     }
 

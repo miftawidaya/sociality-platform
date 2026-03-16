@@ -157,7 +157,7 @@ export function RegisterForm() {
               <button
                 type='button'
                 onClick={() => setShowPassword(!showPassword)}
-                className='absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer text-neutral-500 hover:text-white'
+                className='text-muted-foreground hover:text-foreground absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer'
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 <span className='sr-only'>
@@ -191,7 +191,7 @@ export function RegisterForm() {
               <button
                 type='button'
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className='absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer text-neutral-500 hover:text-white'
+                className='text-muted-foreground hover:text-foreground absolute end-3 top-1/2 -translate-y-1/2 cursor-pointer'
               >
                 {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 <span className='sr-only'>
@@ -235,7 +235,7 @@ export function RegisterForm() {
             <span className='text-foreground'>Already have an account?</span>
             <Link
               href={ROUTES.LOGIN}
-              className='text-primary hover:text-primary-200 font-bold'
+              className='text-primary font-bold hover:opacity-80'
             >
               Login
             </Link>

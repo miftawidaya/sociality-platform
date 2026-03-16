@@ -76,6 +76,8 @@
 
   --color-base-white: #ffffff;
   --color-base-black: #000000;
+  
+  --color-social-like: #b41759;
 
   /* Auth Background Assets (Tailwind v4 mapped) */
   --background-image-auth-mesh: url('/images/bg-gradient.jpg');
@@ -112,13 +114,56 @@
 
   --spacing-field-gap: 0.125rem;
   --spacing-container-max: 78rem;
+  
+  /* Post Detail */
+  --post-detail-content-width: 27.5rem; /* 440px */
 
-  --spacing-auth-card-mobile: 21.5625rem; /* 345px */
-  --spacing-auth-card-desktop: 27.875rem; /* 446px */
-  --spacing-bottom-nav-mobile: 21.5625rem; /* 345px */
-  --spacing-bottom-nav-desktop: 22.5rem; /* 360px */
-  --spacing-bottom-nav-gap: 2.8125rem; /* 45px */
-  --spacing-bottom-nav-item: 5.875rem; /* 94px */
+  /* Animations */
+  --animate-modal-in: modal-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-modal-out: modal-out 0.2s ease-in forwards;
+  --animate-overlay-in: overlay-in 0.3s ease-out;
+  --animate-overlay-out: overlay-out 0.2s ease-in forwards;
+  --ease-smooth-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes modal-out {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.98) translateY(8px);
+    }
+  }
+
+  @keyframes overlay-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes overlay-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 }
 
 :root {
