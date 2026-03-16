@@ -1,6 +1,7 @@
 'use client';
 
 import { PostDetailContent } from '@/features/post/components/post-detail';
+import { PageHeader } from '@/components/layouts/header/PageHeader';
 
 type PostDetailPageClientProps = Readonly<{
   postId: number;
@@ -13,9 +14,11 @@ type PostDetailPageClientProps = Readonly<{
  */
 export function PostDetailPageClient({ postId }: PostDetailPageClientProps) {
   return (
-    <PostDetailContent
-      postId={postId}
-      variant='page'
-    />
+    <>
+      <PageHeader title='Post' backTo='/' className='md:hidden' />
+      <div className='flex w-full justify-center py-6 md:py-12'>
+        <PostDetailContent postId={postId} variant='page' />
+      </div>
+    </>
   );
 }

@@ -4,7 +4,6 @@ import * as React from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { AlertCircle, MoreHorizontal } from 'lucide-react';
-import Link from 'next/link';
 import {
   usePostDetailQuery,
   useCommentsQuery,
@@ -249,7 +248,7 @@ export function PostDetailContent({
             <div className='p-4 pb-2 md:p-5 md:pb-2'>
               <div className='flex flex-row items-center justify-between'>
                 <div className='flex flex-row items-center gap-3'>
-                  <Link href={`/users/${post.author.username}`}>
+                  <a href={`/users/${post.author.username}`}>
                     <Avatar className='size-10'>
                       {post.author.avatarUrl && (
                         <AvatarImage
@@ -262,17 +261,17 @@ export function PostDetailContent({
                         {post.author.username.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
-                  </Link>
+                  </a>
 
                   <div className='flex flex-col'>
-                    <Link
+                    <a
                       href={`/users/${post.author.username}`}
                       className='text-foreground hover:underline'
                     >
                       <span className='text-sm-bold tracking-[-0.01em]'>
                         {post.author.username}
                       </span>
-                    </Link>
+                    </a>
                     <time
                       suppressHydrationWarning
                       className='text-muted-foreground text-xs-regular'

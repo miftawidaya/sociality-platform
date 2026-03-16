@@ -138,19 +138,27 @@ function MobileSearchInput({ onClose }: Readonly<{ onClose: () => void }>) {
   );
 }
 
+import { usePathname } from 'next/navigation';
+
 export function Navbar({ className }: Readonly<{ className?: string }>) {
   useSessionRehydration();
+  const pathname = usePathname();
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   const { user, isAuthenticated } = useSelector(
     (state: RootState) => state.auth
   );
 
+  // Home and Feed should show the standard Navbar on mobile.
+  // Other pages will show PageHeader locally in their components.
+  const isHomeOrFeed = pathname === '/' || pathname === '/feed';
+
   return (
     <nav
       className={cn(
         'bg-background border-border sticky top-0 z-30 w-full border-b',
         'h-16 md:h-20',
+        !isHomeOrFeed && 'max-md:hidden',
         className
       )}
     >

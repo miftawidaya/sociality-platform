@@ -30,23 +30,27 @@ export function CommentItem({
       )}
     >
       <div className='flex flex-row items-center gap-2'>
-        <Avatar className='size-10 shrink-0'>
-          {comment.author.avatarUrl && (
-            <AvatarImage
-              src={comment.author.avatarUrl}
-              alt={`${comment.author.username} avatar`}
-              className='object-cover'
-            />
-          )}
-          <AvatarFallback className='text-sm-bold uppercase'>
-            {comment.author.username.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
+        <a href={`/users/${comment.author.username}`}>
+          <Avatar className='size-10 shrink-0'>
+            {comment.author.avatarUrl && (
+              <AvatarImage
+                src={comment.author.avatarUrl}
+                alt={`${comment.author.username} avatar`}
+                className='object-cover'
+              />
+            )}
+            <AvatarFallback className='text-sm-bold uppercase'>
+              {comment.author.username.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+        </a>
 
         <div className='flex grow flex-col justify-center'>
-          <span className='text-foreground text-xs-semibold md:text-sm-regular leading-5 tracking-[-0.01em]'>
-            {comment.author.username}
-          </span>
+          <a href={`/users/${comment.author.username}`} className='hover:underline'>
+            <span className='text-foreground text-xs-semibold md:text-sm-regular leading-5 tracking-[-0.01em]'>
+              {comment.author.username}
+            </span>
+          </a>
           <div className='flex items-center gap-2'>
             <time
               suppressHydrationWarning

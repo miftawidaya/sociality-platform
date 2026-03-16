@@ -34,7 +34,7 @@ export default async function PostPage({ params }: PostPageProps) {
   });
 
   return (
-    <div className='bg-background flex min-h-screen flex-col items-center py-6 md:py-12'>
+    <div className='bg-background flex min-h-screen w-full flex-col items-center'>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <PostDetailPageClient postId={postId} />
       </HydrationBoundary>

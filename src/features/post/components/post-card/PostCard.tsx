@@ -22,7 +22,7 @@ export function PostCard({
         className={cn(
           'flex w-full flex-col gap-2 md:gap-3',
           'border-border border-b pb-4',
-          'max-w-91 md:max-w-150',
+          'w-full sm:max-w-150',
           className
         )}
       >

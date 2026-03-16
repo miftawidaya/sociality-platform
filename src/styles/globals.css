@@ -250,7 +250,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: var(--spacing-header);
 
   @media (width >= 48rem) {
