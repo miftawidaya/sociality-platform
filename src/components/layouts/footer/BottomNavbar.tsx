@@ -33,6 +33,11 @@ function BottomNavbarComponent() {
   };
 
   const isPostDetailPage = pathname?.startsWith('/posts/');
+  const isEditProfilePage = pathname === '/me/edit';
+
+  if (isEditProfilePage) {
+    return null;
+  }
 
   return (
     <div

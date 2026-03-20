@@ -76,7 +76,7 @@
 
   --color-base-white: #ffffff;
   --color-base-black: #000000;
-  
+
   --color-social-like: #b41759;
 
   /* Auth Background Assets (Tailwind v4 mapped) */
@@ -114,7 +114,7 @@
 
   --spacing-field-gap: 0.125rem;
   --spacing-container-max: 78rem;
-  
+
   /* Post Detail */
   --post-detail-content-width: 27.5rem; /* 440px */
 

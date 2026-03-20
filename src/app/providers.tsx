@@ -15,11 +15,14 @@ interface ProvidersProps {
  * Global Application Providers
  * Orchestrates global state and context providers for the application tree.
  */
-export function Providers({ children }: ProvidersProps) {
+import { Toaster } from '@/components/ui/sonner';
+
+export function Providers({ children }: Readonly<ProvidersProps>) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         {children}
+        <Toaster position='top-right' closeButton />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </Provider>

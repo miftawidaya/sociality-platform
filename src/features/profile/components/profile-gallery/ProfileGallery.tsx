@@ -96,7 +96,7 @@ function GalleryEmptyState({
       </div>
       {buttonLabel && (
         <Button
-          className='bg-primary text-primary-foreground text-sm-bold md:text-md-bold h-10 w-full max-w-64.75 rounded-full hover:opacity-90 md:h-12'
+          className='text-sm-bold md:text-md-bold h-10 w-full max-w-64.75 rounded-full hover:opacity-90 md:h-12'
           asChild={!!buttonHref}
         >
           {buttonHref ? (

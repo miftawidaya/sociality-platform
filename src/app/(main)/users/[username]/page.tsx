@@ -23,27 +23,7 @@ export default async function PublicProfilePage({ params }: ProfilePageProps) {
   const queryClient = new QueryClient();
 
   try {
-    const rawData = await profileApi.getUserProfile(username, token);
-    
-    // Map public profile data to match ProfileResponse expected by ProfileLayout
-    const data = {
-      profile: {
-        id: (rawData as any).id,
-        name: (rawData as any).name,
-        username: (rawData as any).username,
-        email: (rawData as any).email,
-        phone: (rawData as any).phone,
-        bio: (rawData as any).bio,
-        avatarUrl: (rawData as any).avatarUrl,
-        isFollowedByMe: (rawData as any).isFollowing,
-      },
-      stats: {
-        posts: (rawData as any).counts?.post || 0,
-        followers: (rawData as any).counts?.followers || 0,
-        following: (rawData as any).counts?.following || 0,
-        likes: (rawData as any).counts?.likes || 0,
-      }
-    };
+    const data = await profileApi.getUserProfile(username, token);
     
     // Prefetch User Profile
     queryClient.setQueryData(PROFILE_KEYS.user(username), data);

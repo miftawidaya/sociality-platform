@@ -2,17 +2,17 @@
 
 import * as React from 'react';
 import { Grid3, Archive, Heart } from 'iconsax-react';
-import { ProfileHeader } from './ProfileHeader';
-import { ProfileStats } from './ProfileStats';
+import { ProfileHeader, ProfileStats } from '../profile-header';
 import { PageHeader } from '@/components/layouts/header/PageHeader';
 import { ProfileTabs, ProfileTabItem, ProfileTabId } from './ProfileTabs';
-import { ProfileGallery } from './ProfileGallery';
-import type { ProfileResponse } from '../types/profile.types';
+import { ProfileGallery } from '../profile-gallery';
+import type { ProfileResponse } from '../../types/profile.types';
 import {
   useUserPosts,
   useSavedPosts,
   useUserLikes,
-} from '../queries/profile.queries';
+  useUserProfile,
+} from '../../queries/profile.queries';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 
@@ -21,21 +21,29 @@ type ProfileLayoutProps = Readonly<{
   isOwner: boolean;
 }>;
 
-export function ProfileLayout({ data, isOwner }: ProfileLayoutProps) {
+export function ProfileLayout({ data: initialData, isOwner }: ProfileLayoutProps) {
+  const { data: profileData } = useUserProfile(initialData.profile.username);
+  const data = profileData ?? initialData;
+
   const [activeTab, setActiveTab] = React.useState<ProfileTabId>('posts');
 
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
 
-  const tabs: ProfileTabItem[] = [
-    { id: 'posts', label: 'Gallery', icon: Grid3 },
-  ];
+  const tabs: ProfileTabItem[] = [];
 
   if (isOwner) {
-    tabs.push({ id: 'saved', label: 'Saved', icon: Archive });
+    tabs.push(
+      { id: 'posts', label: 'Gallery', icon: Grid3 },
+      { id: 'saved', label: 'Saved', icon: Archive },
+      { id: 'likes', label: 'Liked', icon: Heart }
+    );
   } else {
-    tabs.push({ id: 'likes', label: 'Liked', icon: Heart });
+    tabs.push(
+      { id: 'posts', label: 'Gallery', icon: Grid3 },
+      { id: 'likes', label: 'Liked', icon: Heart }
+    );
   }
 
   const postsQuery = useUserPosts(data.profile.username);
@@ -48,7 +56,7 @@ export function ProfileLayout({ data, isOwner }: ProfileLayoutProps) {
   // Hook 3: Liked posts
   const likesQuery = useUserLikes(
     data.profile.username,
-    !isOwner && activeTab === 'likes',
+    activeTab === 'likes',
     9
   );
 
@@ -57,8 +65,17 @@ export function ProfileLayout({ data, isOwner }: ProfileLayoutProps) {
     currentQuery = postsQuery;
   } else if (activeTab === 'saved') {
     currentQuery = savedQuery;
-  } else {
+  } else if (activeTab === 'likes') {
     currentQuery = likesQuery;
+  } else {
+    currentQuery = {
+      data: { pages: [{ posts: [] }] },
+      isLoading: false,
+      isError: false,
+      hasNextPage: false,
+      isFetchingNextPage: false,
+      fetchNextPage: () => {},
+    };
   }
 
   let emptyMessage: string;
@@ -67,7 +84,7 @@ export function ProfileLayout({ data, isOwner }: ProfileLayoutProps) {
   } else if (activeTab === 'saved') {
     emptyMessage = 'You have not saved any posts.';
   } else {
-    emptyMessage = 'No liked posts yet.';
+    emptyMessage = 'No posts found.';
   }
 
   return (
@@ -87,7 +104,7 @@ export function ProfileLayout({ data, isOwner }: ProfileLayoutProps) {
             </p>
           )}
 
-          <ProfileStats stats={data.stats} />
+          <ProfileStats stats={data.stats} username={data.profile.username} />
         </div>
 
         <div className='mt-2 flex w-full flex-col md:mt-6'>
