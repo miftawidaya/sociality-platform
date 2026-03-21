@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Link from 'next/link';
 import { Heart, Message, Send2, Archive } from 'iconsax-react';
 import { useSelector } from 'react-redux';
 import { cn } from '@/lib/utils';
 import { RootState } from '@/store';
 import { useSavedPostsIdsQuery } from '@/features/post/hooks/useFeedQuery';
 import { PostCardContext } from './PostCard';
+import { PostCommentLink } from './PostCommentLink';
 
 type PostActionsProps = Readonly<{
   likesCount: number;
@@ -84,32 +84,33 @@ export function PostActions({
           </span>
         </button>
 
-        {/* Comment Button - Link to post detail when in PostCard context */}
-        {context ? (
-          <Link
-            href={`/posts/${context.postId}`}
-            scroll={false}
-            aria-label='View comments'
-            className='text-foreground hover:text-muted-foreground group flex items-center gap-1.5 transition-colors'
-          >
-            <Message variant='Linear' color='currentColor' className='size-6' />
-            <span className='text-sm-semibold md:text-md-semibold tracking-[-0.02em]'>
-              {commentsCount}
-            </span>
-          </Link>
-        ) : (
-          <button
-            type='button'
-            onClick={onCommentClick}
-            aria-label='Comment'
-            className='text-foreground hover:text-muted-foreground group flex cursor-pointer items-center gap-1.5 transition-colors'
-          >
-            <Message variant='Linear' color='currentColor' className='size-6' />
-            <span className='text-sm-semibold md:text-md-semibold tracking-[-0.02em]'>
-              {commentsCount}
-            </span>
-          </button>
-        )}
+        {/* Comment Button - Link to post detail via PostCommentLink */}
+        <PostCommentLink
+          aria-label='View comments'
+          className='text-foreground hover:text-muted-foreground group flex items-center gap-1.5 transition-colors'
+          fallback={
+            <button
+              type='button'
+              onClick={onCommentClick}
+              aria-label='Comment'
+              className='text-foreground hover:text-muted-foreground group flex cursor-pointer items-center gap-1.5 transition-colors'
+            >
+              <Message
+                variant='Linear'
+                color='currentColor'
+                className='size-6'
+              />
+              <span className='text-sm-semibold md:text-md-semibold tracking-[-0.02em]'>
+                {commentsCount}
+              </span>
+            </button>
+          }
+        >
+          <Message variant='Linear' color='currentColor' className='size-6' />
+          <span className='text-sm-semibold md:text-md-semibold tracking-[-0.02em]'>
+            {commentsCount}
+          </span>
+        </PostCommentLink>
 
         {/* Share Button */}
         <button

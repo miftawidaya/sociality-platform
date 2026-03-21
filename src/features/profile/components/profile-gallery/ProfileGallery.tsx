@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
@@ -5,6 +7,7 @@ import { Post } from '@/features/post/types';
 import { Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/config/routes';
+import { PostDetailLink } from '@/features/post/components/post-card/PostDetailLink';
 
 type ProfileGalleryProps = Readonly<{
   data?: {
@@ -124,16 +127,6 @@ export function ProfileGallery({
   activeTab,
 }: ProfileGalleryProps) {
   const { ref, inView } = useInView();
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   React.useEffect(() => {
     if (inView && hasNextPage) {
@@ -167,7 +160,6 @@ export function ProfileGallery({
     <>
       <div className='mt-6 grid w-full grid-cols-3 gap-0.5 md:gap-1'>
         {posts.map((post) => {
-          const href = `/posts/${post.id}`;
           const content = (
             <img
               src={post.imageUrl}
@@ -180,23 +172,14 @@ export function ProfileGallery({
           const className =
             'bg-muted group rounded-xxs relative block aspect-square cursor-pointer overflow-hidden md:rounded-md';
 
-          if (isMobile) {
-            return (
-              <a key={post.id} href={href} className={className}>
-                {content}
-              </a>
-            );
-          }
-
           return (
-            <Link
+            <PostDetailLink
               key={post.id}
-              href={href}
-              scroll={false}
+              postId={post.id}
               className={className}
             >
               {content}
-            </Link>
+            </PostDetailLink>
           );
         })}
       </div>
