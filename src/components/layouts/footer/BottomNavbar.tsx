@@ -82,9 +82,9 @@ function BottomNavbarComponent() {
           </span>
         </Link>
 
-        {/* Add Post Button Placeholder */}
-        <button
-          type='button'
+        {/* Add Post Button */}
+        <Link
+          href={ROUTES.ADD_POST}
           className={cn(
             'bg-primary hover:bg-primary/90 flex cursor-pointer items-center justify-center rounded-full transition-colors',
             'h-11 w-11',
@@ -96,7 +96,7 @@ function BottomNavbarComponent() {
             className='text-primary-foreground size-5.5 md:size-6'
             strokeWidth={2.5}
           />
-        </button>
+        </Link>
 
         <Link
           href={ROUTES.PROFILE}

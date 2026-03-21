@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Post } from '@/features/post/types';
 import { Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/config/routes';
 
 type ProfileGalleryProps = Readonly<{
   data?: {
@@ -58,6 +59,7 @@ function GalleryEmptyState({
       description =
         'Share your first post and let the world see your moments, passions, and memories. Make this space truly yours.';
       buttonLabel = 'Upload My First Post';
+      buttonHref = ROUTES.ADD_POST;
     } else {
       title = 'No posts yet';
       description = "This user hasn't shared any posts yet.";

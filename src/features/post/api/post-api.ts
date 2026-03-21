@@ -104,4 +104,11 @@ export const postApi = {
     const response = await api.delete(`/api/comments/${commentId}`);
     return response.data;
   },
+
+  createPost: async (formData: FormData) => {
+    const response = await api.post('/api/posts', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  },
 };

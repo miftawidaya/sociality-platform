@@ -5,6 +5,7 @@ export const ROUTES = {
   FEED: '/feed',
   PROFILE: '/me',
   DEV: '/dev',
+  ADD_POST: '/add-post',
 } as const;
 
 export const AUTH_ONLY_ROUTES: Set<string> = new Set([
@@ -16,6 +17,7 @@ export const AUTH_ONLY_ROUTES: Set<string> = new Set([
 export const PROTECTED_ROUTES: Set<string> = new Set([
   ROUTES.FEED,
   ROUTES.PROFILE,
+  ROUTES.ADD_POST,
 ]);
 
-export const PROTECTED_PREFIXES: readonly string[] = ['/me/'];
+export const PROTECTED_PREFIXES: readonly string[] = ['/me/', '/posts/'];
